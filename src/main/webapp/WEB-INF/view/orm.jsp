@@ -19,6 +19,7 @@
             <td>${numbers.number4}</td>
             <td>${numbers.number5}</td>
             <td>${numbers.number6}</td>
+            <td><a href="/deleteDraw/id/${numbers.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
