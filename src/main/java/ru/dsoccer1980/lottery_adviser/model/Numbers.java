@@ -19,54 +19,26 @@ public class Numbers {
     private int id;
 
     @NotNull
-    @Range(min=1)
+    @Range(min = 1)
     @Column(name = "DRAWNUMBER")
     @Getter @Setter
     private int drawNumber;
 
     @NotNull
-    @Range(min=1, max=48)
-    @Column(name = "NUMBER1")
+    @Range(min = 1, max = 6)
+    @Column(name = "INDEX")
     @Getter @Setter
-    private int number1;
+    private int index;
 
     @NotNull
-    @Range(min=1, max=48)
-    @Column(name = "NUMBER2")
+    @Range(min = 1, max = 48)
+    @Column(name = "NUMBER")
     @Getter @Setter
-    private int number2;
+    private int number;
 
-    @NotNull
-    @Range(min=1, max=48)
-    @Column(name = "NUMBER3")
-    @Getter @Setter
-    private int number3;
-
-    @NotNull
-    @Range(min=1, max=48)
-    @Column(name = "NUMBER4")
-    @Getter @Setter
-    private int number4;
-
-    @NotNull
-    @Range(min=1, max=48)
-    @Column(name = "NUMBER5")
-    @Getter @Setter
-    private int number5;
-
-    @NotNull
-    @Range(min=1, max=48)
-    @Column(name = "NUMBER6")
-    @Getter @Setter
-    private int number6;
-
-    public Numbers(int drawNumber, int number1, int number2, int number3, int number4, int number5, int number6) {
+    public Numbers(int drawNumber, int index, int number) {
         this.drawNumber = drawNumber;
-        this.number1 = number1;
-        this.number2 = number2;
-        this.number3 = number3;
-        this.number4 = number4;
-        this.number5 = number5;
-        this.number6 = number6;
+        this.index = index;
+        this.number = number;
     }
 }

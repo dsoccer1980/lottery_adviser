@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ru.dsoccer1980.lottery_adviser.model.Numbers;
 import ru.dsoccer1980.lottery_adviser.service.ORMService;
@@ -26,7 +27,7 @@ public class ORMController {
     @RequestMapping(value = "/ormFindAllNumbers", method = RequestMethod.GET)
     public ModelAndView findAllUsers() {
         System.out.println("ORMController findAllNumbers is called");
-        List<Numbers> numbers = ormService.queryFindAllNumbers();
+        Map<Integer, List<Numbers>> numbers = ormService.queryFindAllNumbers();
         return new ModelAndView("/orm", "resultObject", numbers);
     }
 

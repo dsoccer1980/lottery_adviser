@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <body>
 
 
-
 <table border="1" cellpadding="8" cellspacing="0">
-    <c:forEach items="${resultObject}" var="numbers">
-        <jsp:useBean id="numbers" scope="page" type="ru.dsoccer1980.lottery_adviser.model.Numbers"/>
+    <c:forEach items="${resultObject}" var="map">
         <tr>
-            <td>${numbers.drawNumber}</td>
-            <td>${numbers.number1}</td>
-            <td>${numbers.number2}</td>
-            <td>${numbers.number3}</td>
-            <td>${numbers.number4}</td>
-            <td>${numbers.number5}</td>
-            <td>${numbers.number6}</td>
+            <td>${map.key}</td>
+            <c:forEach items="${map.value}" var="numbers">
+                <jsp:useBean id="numbers" scope="page" type="ru.dsoccer1980.lottery_adviser.model.Numbers"/>
+                <td>${numbers.number}</td>
+            </c:forEach>
             <td><a href="/deleteDraw/id/${numbers.id}">Delete</a></td>
         </tr>
     </c:forEach>
