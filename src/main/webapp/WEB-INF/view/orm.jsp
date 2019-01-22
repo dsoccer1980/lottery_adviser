@@ -15,7 +15,7 @@
                 <jsp:useBean id="numbers" scope="page" type="ru.dsoccer1980.lottery_adviser.model.Numbers"/>
                 <td>${numbers.number}</td>
             </c:forEach>
-            <td><a href="/deleteDraw/id/${numbers.id}">Delete</a></td>
+            <td><a href="/deleteDraw/id/${map.key}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>

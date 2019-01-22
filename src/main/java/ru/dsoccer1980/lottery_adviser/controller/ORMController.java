@@ -48,9 +48,9 @@ public class ORMController {
     }
 
     @RequestMapping(value = "/deleteDraw/id/{id}", method = RequestMethod.GET)
-    public String drawDelete(@PathVariable(value = "id") int id, HttpServletRequest request) {
+    public String drawDelete(@PathVariable(value = "id") int drawNumber, HttpServletRequest request) {
         System.out.println("ORMController drawDelete is called");
-        ormService.drawDelete(id);
+        ormService.drawDelete(drawNumber);
 
         return "redirect:/ormFindAllNumbers";
     }

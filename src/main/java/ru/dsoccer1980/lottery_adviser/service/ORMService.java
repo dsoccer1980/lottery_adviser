@@ -33,16 +33,18 @@ public class ORMService {
     @Transactional
     public void addNumbers(List<Integer> list) {
         System.out.println("ORMService addNumbers is called");
-        Numbers numbers = new Numbers(list.get(0), list.get(1), list.get(2));
-        entityManager.persist(numbers);
+        for (int index = 1; index < list.size(); index++) {
+            Numbers numbers = new Numbers(list.get(0), index, list.get(index));
+            entityManager.persist(numbers);
+        }
     }
 
     @Transactional
-    public void drawDelete(int id) {
+    public void drawDelete(int drawNumber) {
         System.out.println("ORMService drawDelete is called");
-        String query = "DELETE FROM Numbers n WHERE n.id=:id";
+        String query = "DELETE FROM Numbers n WHERE n.drawNumber=:drawNumber";
         entityManager.createQuery(query)
-                .setParameter("id", id)
+                .setParameter("drawNumber", drawNumber)
                 .executeUpdate();
     }
 }
