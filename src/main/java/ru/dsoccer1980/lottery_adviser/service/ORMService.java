@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import ru.dsoccer1980.lottery_adviser.model.InitialData;
 import ru.dsoccer1980.lottery_adviser.model.Numbers;
 
 
@@ -22,7 +23,7 @@ public class ORMService {
 
     public Map<Integer, List<Numbers>> queryFindAllNumbers() {
         System.out.println("ORMService queryFindAllNumbers is called");
-        String query = "from Numbers order by drawnumber";
+        String query = "from Numbers order by drawnumber,index";
         TypedQuery<Numbers> typedQuery = entityManager.createQuery(query, Numbers.class);
 
         List<Numbers> resultList = typedQuery.getResultList();
@@ -46,6 +47,14 @@ public class ORMService {
         entityManager.createQuery(query)
                 .setParameter("drawNumber", drawNumber)
                 .executeUpdate();
+    }
+
+    @Transactional
+    public void populateDb() {
+        System.out.println("ORMService populateDb is called");
+        for (List<Integer> list : InitialData.data) {
+            addNumbers(list);
+        }
     }
 }
 

@@ -55,6 +55,14 @@ public class ORMController {
         return "redirect:/ormFindAllNumbers";
     }
 
+    @RequestMapping(value = "/populateDb", method = RequestMethod.GET)
+    public String populateDb(HttpServletRequest request) {
+        System.out.println("ORMController populateDb is called");
+        ormService.populateDb();
+
+        return "redirect:/ormFindAllNumbers";
+    }
+
 }
 
 
