@@ -8,6 +8,8 @@
 
 <a href="/ormFindAllNumbers">Numbers</a> <BR><BR>
 
-<a href="/populateDb">populate DB</a>
+<a href="/populateDb">populate DB</a> <BR><BR>
+
+<a href="/numbersAverageAppearance">numbersAverageAppearance</a>
 </body>
 </html>

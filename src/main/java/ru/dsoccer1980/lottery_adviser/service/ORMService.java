@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -55,6 +57,32 @@ public class ORMService {
         for (List<Integer> list : InitialData.data) {
             addNumbers(list);
         }
+    }
+
+    public Map<Integer, Integer> numbersAverageAppearance() {
+        System.out.println("ORMService numbersAverageAppearance is called");
+        Map<Integer, Integer> result = new HashMap<>();
+        for (int i = 1; i <= 48; i++) {  //TODO
+            result.put(i, numberAverageAppearance(i));
+        }
+        return result;
+    }
+
+    public Integer numberAverageAppearance(Integer number) {
+        System.out.println("ORMService numberAverageAppearance is called");
+        String query = "Select n from Numbers n WHERE n.number=:number order by drawnumber";
+        List<Numbers> list = entityManager.createQuery(query).setParameter("number", number).getResultList();
+        List<Integer> drawNumbers = list.stream().map(Numbers::getDrawNumber).collect(Collectors.toList());
+        List<Integer> frequency = new ArrayList<>();
+        int lastDrawNumber = 0;
+        for (int drawnumber : drawNumbers) {
+            if (lastDrawNumber != 0) {
+                frequency.add(drawnumber - lastDrawNumber);
+            }
+            lastDrawNumber = drawnumber;
+        }
+        return (int) (frequency.stream().mapToInt(n -> n).average().orElse(0) + 0.5);
+
     }
 }
 
