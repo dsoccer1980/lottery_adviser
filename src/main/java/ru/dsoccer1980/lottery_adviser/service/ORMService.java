@@ -6,10 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import ru.dsoccer1980.lottery_adviser.model.InitialData;
@@ -59,13 +56,14 @@ public class ORMService {
         }
     }
 
-    public Map<Integer, Integer> numbersAverageAppearance() {
-        System.out.println("ORMService numbersAverageAppearance is called");
+    public Map<Integer, Integer> numbersNextAppearance() {
+        System.out.println("ORMService numbersNextAppearance is called");
         Map<Integer, Integer> result = new HashMap<>();
         for (int i = 1; i <= 48; i++) {  //TODO
-            result.put(i, numberAverageAppearance(i));
+            result.put(i, numberAverageAppearance(i) + numberLastAppearance(i));
         }
-        return result;
+        return result.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
     public Integer numberAverageAppearance(Integer number) {
@@ -82,7 +80,15 @@ public class ORMService {
             lastDrawNumber = drawnumber;
         }
         return (int) (frequency.stream().mapToInt(n -> n).average().orElse(0) + 0.5);
+    }
 
+    private int numberLastAppearance(Integer number) {
+        String query = "Select n from Numbers n WHERE n.number=:number order by drawnumber DESC";
+        int lastDrawNumber = ((Numbers) entityManager.createQuery(query)
+                .setParameter("number", number)
+                .setMaxResults(1)
+                .getSingleResult()).getDrawNumber();
+        return lastDrawNumber;
     }
 }
 

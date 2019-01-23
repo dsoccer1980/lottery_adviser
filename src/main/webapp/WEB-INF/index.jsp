@@ -10,6 +10,6 @@
 
 <a href="/populateDb">populate DB</a> <BR><BR>
 
-<a href="/numbersAverageAppearance">numbersAverageAppearance</a>
+<a href="/numbersNextAppearance">numbersAverageAppearance</a>
 </body>
 </html>

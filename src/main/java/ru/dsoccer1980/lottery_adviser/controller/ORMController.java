@@ -63,10 +63,10 @@ public class ORMController {
         return "redirect:/ormFindAllNumbers";
     }
 
-    @RequestMapping(value = "/numbersAverageAppearance", method = RequestMethod.GET)
+    @RequestMapping(value = "/numbersNextAppearance", method = RequestMethod.GET)
     public ModelAndView numbersAverageAppearance(HttpServletRequest request) {
-        System.out.println("ORMController numbersAverageAppearance is called");
-        Map<Integer, Integer> result = ormService.numbersAverageAppearance();
+        System.out.println("ORMController numbersNextAppearance is called");
+        Map<Integer, Integer> result = ormService.numbersNextAppearance();
 
         return new ModelAndView("/averageAppearance", "resultObject", result);
     }
