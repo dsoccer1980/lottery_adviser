@@ -1,31 +1,31 @@
 package ru.dsoccer1980.lottery_adviser.service;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import ru.dsoccer1980.lottery_adviser.model.InitialData;
 import ru.dsoccer1980.lottery_adviser.model.Numbers;
+import ru.dsoccer1980.lottery_adviser.repository.NumbersRepository;
 
 
-@Repository
+@Service
 @Transactional(readOnly = true)
 public class ORMService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final NumbersRepository numbersRepository;
+
+    @Autowired
+    public ORMService(NumbersRepository numbersRepository) {
+        this.numbersRepository = numbersRepository;
+    }
 
     public Map<Integer, List<Numbers>> queryFindAllNumbers() {
         System.out.println("ORMService queryFindAllNumbers is called");
-        String query = "from Numbers order by drawnumber,index";
-        TypedQuery<Numbers> typedQuery = entityManager.createQuery(query, Numbers.class);
-
-        List<Numbers> resultList = typedQuery.getResultList();
+        List<Numbers> resultList = numbersRepository.findAll();
         Map<Integer, List<Numbers>> collect = resultList.stream().collect(Collectors.groupingBy(Numbers::getDrawNumber));
         return collect;
     }
@@ -35,17 +35,14 @@ public class ORMService {
         System.out.println("ORMService addNumbers is called");
         for (int index = 1; index < list.size(); index++) {
             Numbers numbers = new Numbers(list.get(0), index, list.get(index));
-            entityManager.persist(numbers);
+            numbersRepository.save(numbers);
         }
     }
 
     @Transactional
     public void drawDelete(int drawNumber) {
         System.out.println("ORMService drawDelete is called");
-        String query = "DELETE FROM Numbers n WHERE n.drawNumber=:drawNumber";
-        entityManager.createQuery(query)
-                .setParameter("drawNumber", drawNumber)
-                .executeUpdate();
+        numbersRepository.delete(drawNumber);
     }
 
     @Transactional
@@ -68,8 +65,7 @@ public class ORMService {
 
     public Integer numberAverageAppearance(Integer number) {
         System.out.println("ORMService numberAverageAppearance is called");
-        String query = "Select n from Numbers n WHERE n.number=:number order by drawnumber";
-        List<Numbers> list = entityManager.createQuery(query).setParameter("number", number).getResultList();
+        List<Numbers> list = numbersRepository.findByNumberOrderByDrawNumber(number);
         List<Integer> drawNumbers = list.stream().map(Numbers::getDrawNumber).collect(Collectors.toList());
         List<Integer> frequency = new ArrayList<>();
         int lastDrawNumber = 0;
@@ -83,12 +79,7 @@ public class ORMService {
     }
 
     private int numberLastAppearance(Integer number) {
-        String query = "Select n from Numbers n WHERE n.number=:number order by drawnumber DESC";
-        int lastDrawNumber = ((Numbers) entityManager.createQuery(query)
-                .setParameter("number", number)
-                .setMaxResults(1)
-                .getSingleResult()).getDrawNumber();
-        return lastDrawNumber;
+        return numbersRepository.findTopByNumberOrderByDrawNumberDesc(number).getDrawNumber();
     }
 }
 
