@@ -26,7 +26,7 @@
         <hibernate.version>5.0.1.Final</hibernate.version>
 
         <!-- Spring Data -->
-        <spring-framework.data.version>1.9.1.RELEASE</spring-framework.data.version>
+        <spring-framework.data.version>1.11.23.RELEASE</spring-framework.data.version>
 
     </properties>
 
