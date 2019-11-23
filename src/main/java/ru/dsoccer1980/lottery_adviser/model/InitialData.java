@@ -241,10 +241,32 @@ public class InitialData {
         data.add(Arrays.asList(1347, 45, 25, 26, 46, 41, 15));
         data.add(Arrays.asList(1348, 44, 3, 9, 41, 16, 40));
         data.add(Arrays.asList(1349, 20, 5, 12, 9, 33, 26));
-        System.out.println(data);
-
-
+        data.add(Arrays.asList(1350, 46, 37, 13, 15, 44, 17));
+        data.add(Arrays.asList(1351, 36, 21, 45, 11, 18, 3));
+        data.add(Arrays.asList(1352, 13, 3, 32, 4, 8, 37));
+        data.add(Arrays.asList(1353, 35, 10, 25, 27, 1, 14));
+        data.add(Arrays.asList(1354, 1, 12, 24, 11, 10, 43));
+        data.add(Arrays.asList(1355, 21, 46, 39, 13, 4, 35));
+        data.add(Arrays.asList(1356, 23, 6, 28, 32, 22, 1));
+        data.add(Arrays.asList(1357, 31, 9, 22, 8, 15, 32));
+        data.add(Arrays.asList(1358, 21, 5, 34, 46, 39, 10));
+        data.add(Arrays.asList(1359, 18, 27, 36, 7, 14, 25));
+        data.add(Arrays.asList(1360, 15, 37, 3, 44, 47, 32));
+        data.add(Arrays.asList(1361, 46, 15, 18, 48, 39, 26));
+        data.add(Arrays.asList(1362, 11, 32, 30, 26, 9, 37));
+        data.add(Arrays.asList(1363, 30, 23, 47, 43, 22, 45));
+        data.add(Arrays.asList(1364, 10, 16, 37, 30, 44, 43));
+        data.add(Arrays.asList(1365, 25, 31, 4, 26, 6, 21));
+        data.add(Arrays.asList(1366, 44, 7, 43, 37, 48, 10));
+        data.add(Arrays.asList(1367, 43, 24, 14, 29, 28, 41));
+        data.add(Arrays.asList(1368, 28, 8, 34, 26, 42, 2));
+        data.add(Arrays.asList(1369, 3, 4, 45, 15, 11, 38));
+        data.add(Arrays.asList(1370, 46, 37, 2, 39, 10, 41));
+        data.add(Arrays.asList(1371, 30, 33, 46, 25, 27, 16));
+        data.add(Arrays.asList(1372, 48, 46, 13, 5, 23, 20));
+        data.add(Arrays.asList(1373, 36, 26, 14, 19, 40, 32));
+        data.add(Arrays.asList(1374, 42, 15, 32, 14, 7, 1));
+        data.add(Arrays.asList(1375, 9, 34, 32, 29, 41, 23));
     }
-
 
 }

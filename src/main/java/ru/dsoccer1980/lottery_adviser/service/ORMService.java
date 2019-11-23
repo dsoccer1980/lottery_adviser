@@ -78,6 +78,26 @@ public class ORMService {
         return (int) (frequency.stream().mapToInt(n -> n).average().orElse(0) + 0.5);
     }
 
+    public void findByNumberBetween() {
+        int value1 = 43;
+        int value2 = 48;
+        List<Numbers> byNumberBetween = numbersRepository.findByNumberBetween(value1, value2);
+        byNumberBetween.stream().filter(num -> num.getNumber()>=value1 && num.getNumber()<=value2).forEach(num->System.out.println(num.getDrawNumber() + " " + num.getNumber()));
+    }
+
+    public Map<Integer, List<Numbers>> queryFindExactNumbers() {
+       // List<Integer> integers = Arrays.asList(1,7,13,19,25,31,37,43);
+       // List<Integer> integers = Arrays.asList(2,8,14,20,26,32,38,44);
+       // List<Integer> integers = Arrays.asList(3,9,15,21,27,33,39,45);
+       // List<Integer> integers = Arrays.asList(4,10,16,22,28,34,40,46);
+       // List<Integer> integers = Arrays.asList(5,11,17,23,29,35,41,47);
+        List<Integer> integers = Arrays.asList(6,12,18,24,30,36,42,48);
+        List<Numbers> resultList = numbersRepository.findAll().stream().filter(num->integers.contains(num.getNumber())).collect(Collectors.toList());
+        Map<Integer, List<Numbers>> collect = resultList.stream().sorted(Comparator.comparing(Numbers::getDrawNumber)).collect(Collectors.groupingBy(Numbers::getDrawNumber));
+        return collect;
+    }
+
+
     private int numberLastAppearance(Integer number) {
         return numbersRepository.findTopByNumberOrderByDrawNumberDesc(number).getDrawNumber();
     }

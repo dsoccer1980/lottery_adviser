@@ -71,6 +71,19 @@ public class ORMController {
         return new ModelAndView("/averageAppearance", "resultObject", result);
     }
 
+    @RequestMapping(value = "/numbersBetween", method = RequestMethod.GET)
+    public void numbersBetween(HttpServletRequest request) {
+       ormService.findByNumberBetween();
+
+
+    }
+
+    @RequestMapping(value = "/ormExactNumbers", method = RequestMethod.GET)
+    public ModelAndView findExactNumber() {
+        Map<Integer, List<Numbers>> numbers = ormService.queryFindExactNumbers();
+        return new ModelAndView("/orm", "resultObject", numbers);
+    }
+
 }
 
 

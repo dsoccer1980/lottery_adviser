@@ -28,4 +28,6 @@ public interface NumbersRepository extends JpaRepository<Numbers, Integer> {
 
     Numbers findTopByNumberOrderByDrawNumberDesc(int number);
 
+    List<Numbers> findByNumberBetween(int value, int value2);
+
 }
